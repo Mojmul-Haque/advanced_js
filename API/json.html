@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON</title>
+</head>
+
+<body>
+
+    <h1>JSON Practice</h1>
+    <h3>Create a json file from json placeholder</h3>
+    <ul id="user_email_container"></ul>
+
+
+
+    <script>
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(json => displayUser(json))
+            .catch(eror => console.log(eror))
+
+        function displayUser(users) {
+            console.log(users)
+            const userDetails = users;
+            const getUserName = userDetails.map(user => user.name)
+            const usreAddress = userDetails.map(userAdress => userAdress.phone)
+                // i can access all propertise in json objects
+
+            for (let i = 0; i < users.length; i++) {
+                const getUserEmail = users[i].email;
+                const getUserName = users[i].username;
+                console.log('userName = ', getUserName)
+                const ul = document.getElementById('user_email_container');
+                const li = document.createElement('li');
+                let add = document.createAttribute('class')
+                add.value = 'user_setup'
+                li.innerText = getUserEmail;
+                let separate = li.setAttributeNode(add)
+                ul.appendChild(li).style.listStyle = 'square'
+
+            }
+
+        }
+    </script>
+</body>
+
+</html>
